@@ -45,10 +45,10 @@ function scene:init()
 	self.aabb_root = self.root_node:attach(menori.Node())
 
 	-- loading the fragment shader code for lighting
-	local lighting_frag = menori.utils.shader_preprocess(love.filesystem.read('examples/basic_lighting/basic_lighting_frag.glsl'))
+	local lighting_frag = menori.utils.shader_preprocess(love.filesystem.read('scenes/basic_lighting/basic_lighting_frag.glsl'))
 	local lighting_shader = love.graphics.newShader(menori.ShaderUtils.cache['default_mesh_vert'], lighting_frag)
 
-	local gltf = menori.glTFLoader.load('examples/assets/pokemon_firered_-_players_room.glb')
+	local gltf = menori.glTFLoader.load('scenes/assets/pokemon_firered_-_players_room.glb')
 	local scenes = menori.NodeTreeBuilder.create(gltf, function (scene, builder)
 		-- Callback for each scene in the gltf.
 		-- Create AABB for each node and add it to the aabb_root node.

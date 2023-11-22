@@ -51,7 +51,7 @@ end
 local function init_ssao_shader()
 	local bias = 0.04
 	local noise_t = generate_ssao_noise_texture()
-	local ssao_shader = love.graphics.newShader('examples/SSAO/ssao.glsl')
+	local ssao_shader = love.graphics.newShader('scenes/SSAO/ssao.glsl')
 	local samples = generate_hemisphere_kernels(64)
 
 	ssao_shader:send('kernel_size', 64)
@@ -86,15 +86,15 @@ function scene:init()
 
 	self.ssao_radius = 0.85
 	self.ssao_shader = init_ssao_shader()
-	self.apply_ssao_shader = love.graphics.newShader('examples/SSAO/apply_ssao.glsl')
-	self.ssao_blur_shader = love.graphics.newShader('examples/SSAO/ssao_blur.glsl')
+	self.apply_ssao_shader = love.graphics.newShader('scenes/SSAO/apply_ssao.glsl')
+	self.ssao_blur_shader = love.graphics.newShader('scenes/SSAO/ssao_blur.glsl')
 
 	self.camera = menori.PerspectiveCamera(60, w/h, 0.1, 1024)
 	self.environment = menori.Environment(self.camera)
 
 	self.root_node = menori.Node()
 
-	local gltf = menori.glTFLoader.load('examples/assets/choco_bunny.glb')
+	local gltf = menori.glTFLoader.load('scenes/assets/choco_bunny.glb')
 	local scenes = menori.NodeTreeBuilder.create(gltf, function (scene, builder)
 		scene:traverse(function (node)
 			if node.mesh then
